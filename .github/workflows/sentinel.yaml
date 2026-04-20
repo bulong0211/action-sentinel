@@ -11,7 +11,13 @@ jobs:
         steps:
         - name: 读取仓库内容 📖
           uses: actions/checkout@v4
-          
+        
+        - name: 设置 Node.js 环境 ⚙️
+          uses: actions/setup-node@v4
+          with:
+            node-version: '25'   # 改成你 package.json 里的引擎版本
+            cache: 'npm'
+        
         - name: 安装依赖、项目打包 📦
           run: 
             npm install
@@ -22,4 +28,3 @@ jobs:
           with:
             branch: gh-pages
             folder: build
-          
