@@ -43,14 +43,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       
-      - name: 检查 CI 端的 lockfile
-        run: |
-            cat package-lock.json | grep yaml@2.8.3 || echo "❌ CI端没有 yaml@2.8.3"
-            npm hash-files package-lock.json
       - name: 安装依赖
-        run: |
-          npm ci --prefer-offline --no-audit
-          echo "✅ 依赖安装完成"
+        run: npm install --no-audit --no-fund
       
       - name: 构建项目
         run: |
