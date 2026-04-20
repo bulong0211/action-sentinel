@@ -78,6 +78,11 @@ jobs:
           echo "CNAME" >> build/CNAME
         if: false  # 有自定义域名时改为 true
       
+      - name: 🛠️ 调试：打印目录结构
+        run: |
+            pwd
+            ls -R
+      
       - name: 部署到 GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
