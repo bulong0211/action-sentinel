@@ -43,6 +43,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       
+      - name: 检查 CI 端的 lockfile
+        run: |
+            cat package-lock.json | grep yaml@2.8.3 || echo "❌ CI端没有 yaml@2.8.3"
+            npm hash-files package-lock.json
       - name: 安装依赖
         run: |
           npm ci --prefer-offline --no-audit
@@ -77,11 +81,7 @@ jobs:
           touch build/.nojekyll
           echo "CNAME" >> build/CNAME
         if: false  # 有自定义域名时改为 true
-      
-      - name: 检查 CI 端的 lockfile
-        run: |
-            cat package-lock.json | grep yaml@2.8.3 || echo "❌ CI端没有 yaml@2.8.3"
-            npm hash-files package-lock.json
+   
       
       - name: 🛠️ 调试：打印目录结构
         run: |
